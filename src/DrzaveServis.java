@@ -33,7 +33,7 @@ public class DrzaveServis {
             dodajDrzavu(connection, drzave);
 
             // pozovi pohranjenu proceduru da obriše države
-            int defaultId = 1;
+            int defaultId = 4;
             brisiDrzaveById(connection, defaultId);
 
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class DrzaveServis {
         String insertQuery = "INSERT INTO Drzava (Naziv) VALUES (?);";
         try (PreparedStatement ps = connection.prepareStatement(insertQuery)) {
             for (String drzava : drzave) {
-                ps.setString(1, drzava);
+                ps.setString(4, drzava);
                 ps.executeUpdate();
             }
             System.out.println("Države su dodane!");
@@ -56,7 +56,7 @@ public class DrzaveServis {
     private static void brisiDrzaveById(Connection connection, int defaultId) throws SQLException {
         String callProcedure = "{CALL BrisanjeDrzavaById(?)}";
         try (CallableStatement cs = connection.prepareCall(callProcedure)) {
-            cs.setInt(1, defaultId);
+            cs.setInt(4, defaultId);
             cs.execute();
             System.out.println("Države su obrisane!");
         }
